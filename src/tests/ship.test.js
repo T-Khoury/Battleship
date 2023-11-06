@@ -1,7 +1,7 @@
 import { Ship } from '../modules/ship';
 
 
-describe('Ship functions', () => {
+describe('Ship methods', () => {
     let submarine = Ship(3);
 
     test('Ship with no hits returns false isSunk', () => {
