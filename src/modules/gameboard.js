@@ -110,6 +110,28 @@ function Gameboard() {
                 
             }
 
+        },
+        allShipsSunk() {
+            let allShipsPlaced = true
+            let allShipsSunk = true
+            for (let ship in this.ships) {
+                if (this.ships[ship] == null) {
+                    allShipsPlaced = false;
+                }
+            }
+            if (!allShipsPlaced) {
+                return 'All ships not placed'
+            } else {
+                allShipsSunk = true
+                for (let ship in this.ships) {
+                    if (this.ships[ship].isSunk() == false) {
+                        allShipsSunk = false
+                    }
+                }
+            }
+            return allShipsSunk
+
+
         }
     }
 

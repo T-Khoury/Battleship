@@ -43,7 +43,7 @@ describe('Gameboard methods', () => {
         let gameboard = Gameboard();
         gameboard.createBoard();
 
-        expect(gameboard.allShipsSunk()).toBe(false);
+        expect(gameboard.allShipsSunk()).toBe('All ships not placed');
 
         gameboard.placeShip('a1', 'a2');
         gameboard.placeShip('B1', 'b3');
