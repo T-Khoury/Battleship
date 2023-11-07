@@ -5,7 +5,6 @@ describe('Gameboard methods', () => {
     
     test('Placing a ship in an empty location creates and assigns the ship object of appropriate length to those cells', () => {
         let gameboard = Gameboard();
-        gameboard.createBoard();
         gameboard.placeShip('b2', 'F2');
 
         expect(gameboard.board.find((cell) => cell.row === 'B' && cell.col === '2').ship.length).toBe(5);
@@ -15,13 +14,11 @@ describe('Gameboard methods', () => {
     })
     test('Placing a ship assigns the ship to the board', () => {
         let gameboard = Gameboard();
-        gameboard.createBoard();
         gameboard.placeShip('C3', 'C6');
         expect(gameboard.ships.battleship).not.toBe(null);
     })
     test('Receiving an attack hits the ship at the coordinates if there is one', () => {
         let gameboard = Gameboard();
-        gameboard.createBoard();
         gameboard.placeShip('a1', 'a4');
 
         
@@ -31,7 +28,6 @@ describe('Gameboard methods', () => {
     })
     test('Attacking an empty cell records a missed attack', () => {
         let gameboard = Gameboard();
-        gameboard.createBoard();
 
         expect(gameboard.receiveAttack('B2')).toBe('Miss');
         expect(gameboard.returnCell('b2').attacked).toBe(true);
@@ -41,7 +37,6 @@ describe('Gameboard methods', () => {
 
     test('Gameboard can report whether or not all ships are sunk', () => {
         let gameboard = Gameboard();
-        gameboard.createBoard();
 
         expect(gameboard.allShipsSunk()).toBe('All ships not placed');
 

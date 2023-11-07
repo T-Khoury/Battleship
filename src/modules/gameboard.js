@@ -133,6 +133,8 @@ function Gameboard() {
         }
     }
 
+    gameboard.createBoard();
+
     return gameboard
 }
 
