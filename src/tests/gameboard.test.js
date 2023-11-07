@@ -27,14 +27,14 @@ describe('Gameboard methods', () => {
         
         expect(gameboard.receiveAttack('a3')).toBe('Hit');
         expect(gameboard.returnCell('a3').ship.hitNumber).toBe(1);
-        expect(gameboard.board.returnCell('a3').attacked).toBe(true);
+        expect(gameboard.returnCell('a3').attacked).toBe(true);
     })
     test('Attacking an empty cell records a missed attack', () => {
         let gameboard = Gameboard();
         gameboard.createBoard();
 
         expect(gameboard.receiveAttack('B2')).toBe('Miss');
-        expect(gameboard.board.returnCell('b2').attacked).toBe(false);
+        expect(gameboard.returnCell('b2').attacked).toBe(true);
 
         expect(gameboard.missedAttacks.includes('B2')).toBe(true);
     })

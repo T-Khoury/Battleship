@@ -3,6 +3,7 @@ import { Ship } from "./ship";
 function Gameboard() {
     let gameboard = {
         board: [],
+        missedAttacks: [],
         ships: {
             carrier: null,
             battleship: null,
@@ -94,7 +95,21 @@ function Gameboard() {
             return newShip
         },
         receiveAttack(coordinates) {
-            
+            let cell = this.returnCell(coordinates);
+            if (cell.attacked) {
+                return 'Error: already hit'
+            } else {
+                cell.attacked = true
+                if (cell.ship) {
+                    cell.ship.hit();
+                    return 'Hit'
+                } else {
+                    this.missedAttacks.push(`${coordinates[0].toUpperCase()}${coordinates.slice(1)}`);
+                    return 'Miss'
+                }
+                
+            }
+
         }
     }
 
