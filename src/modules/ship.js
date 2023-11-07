@@ -4,7 +4,8 @@ function Ship(length) {
         hitNumber: 0,
         sunk: false,
         hit() {
-            this.hitNumber ++
+            this.hitNumber ++;
+            this.isSunk();
         },
         isSunk() {
             if (this.length === this.hitNumber) {
