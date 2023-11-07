@@ -24,6 +24,13 @@ function Gameboard() {
                 }
             }
         },
+        returnCell(coordinates) {
+            let row = coordinates[0].toUpperCase();
+            let col = coordinates.slice(1);
+            let cell = this.board.filter((cell) => cell.row == row && cell.col == col)[0];
+
+            return cell
+        },
         assignShip(ship) {
             switch (ship.length) {
                 case 5:
@@ -46,13 +53,15 @@ function Gameboard() {
         },
         placeShip(start, end) {
             console.log(start[0], end[1])
+            let endcol = end.slice(1)
+            let startcol = start.slice(1)
             let newShip = null
             if (start[0].toUpperCase() === end[0].toUpperCase()) {
-                let shipSize = Math.abs(parseInt(start[1]) - parseInt(end[1])) + 1;
+                let shipSize = Math.abs(parseInt(start[1]) - parseInt(endcol)) + 1;
                 newShip = Ship(shipSize);
                 this.assignShip(newShip);
 
-                let chosenCells = this.board.filter((cell) => (cell.row == start[0] && (cell.col <= Math.max(parseInt(start[1]), parseInt(end[1])) && cell.col >= Math.min(parseInt(start[1]), parseInt(end[1])))))
+                let chosenCells = this.board.filter((cell) => (cell.row == start[0].toUpperCase() && (cell.col <= Math.max(parseInt(startcol), parseInt(endcol)) && cell.col >= Math.min(parseInt(startcol), parseInt(endcol)))))
 
                 for (const cell in chosenCells) {
                     chosenCells[cell].ship = newShip
@@ -75,7 +84,7 @@ function Gameboard() {
                 newShip = Ship(shipSize);
                 this.assignShip(newShip);
 
-                let chosenCells = this.board.filter((cell) => (cell.col == start[1] && (letters[cell.row] <= Math.max(letters[start[0].toUpperCase()], letters[end[0].toUpperCase()]) && letters[cell.row] >= Math.min(letters[start[0].toUpperCase()], letters[end[0].toUpperCase()]))));
+                let chosenCells = this.board.filter((cell) => (cell.col == startcol && (letters[cell.row] <= Math.max(letters[start[0].toUpperCase()], letters[end[0].toUpperCase()]) && letters[cell.row] >= Math.min(letters[start[0].toUpperCase()], letters[end[0].toUpperCase()]))));
 
                 for (const cell in chosenCells) {
                     chosenCells[cell].ship = newShip
@@ -83,6 +92,9 @@ function Gameboard() {
 
             }
             return newShip
+        },
+        receiveAttack(coordinates) {
+            
         }
     }
 
