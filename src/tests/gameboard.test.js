@@ -17,7 +17,7 @@ describe('Gameboard methods', () => {
         let gameboard = Gameboard();
         gameboard.createBoard();
         gameboard.placeShip('C3', 'C6');
-        expect(gameboard.ships.battleship).not.toBe(null)
+        expect(gameboard.ships.battleship).not.toBe(null);
     })
     test('Receiving an attack hits the ship at the coordinates if there is one', () => {
         let gameboard = Gameboard();
@@ -37,6 +37,26 @@ describe('Gameboard methods', () => {
         expect(gameboard.returnCell('b2').attacked).toBe(true);
 
         expect(gameboard.missedAttacks.includes('B2')).toBe(true);
+    })
+
+    test('Gameboard can report whether or not all ships are sunk', () => {
+        let gameboard = Gameboard();
+        gameboard.createBoard();
+
+        expect(gameboard.allShipsSunk()).toBe(false);
+
+        gameboard.placeShip('a1', 'a2');
+        gameboard.placeShip('B1', 'b3');
+        gameboard.placeShip('c1', 'c3');
+        gameboard.placeShip('d1', 'd4');
+        gameboard.placeShip('e1', 'E5');
+
+        expect(gameboard.allShipsSunk()).toBe(false);
+
+        let attacks = ['a1', 'a2', 'b1', 'b2', 'b3', 'c1', 'c2', 'c3', 'd1', 'd2', 'd3', 'd4', 'e1', 'e2', 'e3', 'e4', 'e5'];
+        attacks.forEach((coordinate) => gameboard.receiveAttack(coordinate));
+
+        expect(gameboard.allShipsSunk()).toBe(true);
     })
         
 })
