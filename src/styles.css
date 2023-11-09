@@ -1,0 +1,4 @@
+#playerOneContainer {
+    display: grid;
+    grid-template-columns: repeat(10, auto);
+}
