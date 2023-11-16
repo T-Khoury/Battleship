@@ -1,3 +1,4 @@
+import { game } from "./battleship";
 import { Ship } from "./ship";
 
 function Gameboard() {
@@ -76,45 +77,12 @@ function Gameboard() {
             }
         },
         placeShip(start, end) {
-            console.log(start[0], end[1])
-            let endcol = end.slice(1)
-            let startcol = start.slice(1)
-            let newShip = null
-            if (start[0].toUpperCase() === end[0].toUpperCase()) {
-                let shipSize = Math.abs(parseInt(start[1]) - parseInt(endcol)) + 1;
-                newShip = Ship(shipSize);
-                this.assignShip(newShip);
-
-                let chosenCells = this.board.filter((cell) => (cell.row == start[0].toUpperCase() && (cell.col <= Math.max(parseInt(startcol), parseInt(endcol)) && cell.col >= Math.min(parseInt(startcol), parseInt(endcol)))))
-
-                for (const cell in chosenCells) {
-                    chosenCells[cell].ship = newShip
-                };
-
-            } else {
-                let letters = {
-                    'A': 1,
-                    'B': 2,
-                    'C': 3,
-                    'D': 4,
-                    'E': 5,
-                    'F': 6,
-                    'G': 7,
-                    'H': 8,
-                    'I': 9,
-                    'J': 10
-                }
-                let shipSize = Math.abs(letters[start[0].toUpperCase()] - letters[end[0].toUpperCase()]) + 1;
-                newShip = Ship(shipSize);
-                this.assignShip(newShip);
-
-                let chosenCells = this.board.filter((cell) => (cell.col == startcol && (letters[cell.row] <= Math.max(letters[start[0].toUpperCase()], letters[end[0].toUpperCase()]) && letters[cell.row] >= Math.min(letters[start[0].toUpperCase()], letters[end[0].toUpperCase()]))));
-
-                for (const cell in chosenCells) {
-                    chosenCells[cell].ship = newShip
-                };
-
-            }
+            let chosenCells = gameboard.returnCells(start, end);
+            let shipSize = chosenCells.length;
+            let newShip = Ship(shipSize);
+            for (const cell in chosenCells) {
+                chosenCells[cell].ship = newShip
+            };
             return newShip
         },
         receiveAttack(coordinates) {
