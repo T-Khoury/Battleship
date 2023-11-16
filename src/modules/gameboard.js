@@ -32,6 +32,29 @@ function Gameboard() {
 
             return cell
         },
+        returnCells(start, end) {
+            let endcol = end.slice(1);
+            let startcol = start.slice(1);
+            let chosenCells
+            if (start[0].toUpperCase() === end[0].toUpperCase()) {
+                chosenCells = this.board.filter((cell) => (cell.row == start[0].toUpperCase() && (cell.col <= Math.max(parseInt(startcol), parseInt(endcol)) && cell.col >= Math.min(parseInt(startcol), parseInt(endcol)))));
+            }  else {
+                let letters = {
+                    'A': 1,
+                    'B': 2,
+                    'C': 3,
+                    'D': 4,
+                    'E': 5,
+                    'F': 6,
+                    'G': 7,
+                    'H': 8,
+                    'I': 9,
+                    'J': 10
+                }
+                chosenCells = this.board.filter((cell) => (cell.col == startcol && (letters[cell.row] <= Math.max(letters[start[0].toUpperCase()], letters[end[0].toUpperCase()]) && letters[cell.row] >= Math.min(letters[start[0].toUpperCase()], letters[end[0].toUpperCase()]))));
+            }
+            return chosenCells
+        },
         assignShip(ship) {
             switch (ship.length) {
                 case 5:
