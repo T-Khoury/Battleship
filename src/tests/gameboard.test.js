@@ -7,9 +7,9 @@ describe('Gameboard methods', () => {
         let gameboard = Gameboard();
         gameboard.placeShip('b2', 'F2');
 
-        expect(gameboard.board.find((cell) => cell.row === 'B' && cell.col === '2').ship.length).toBe(5);
+        expect(gameboard.returnCell('b2').ship.length).toBe(5);
         gameboard.placeShip('D2', 'D4');
-        expect(gameboard.board.find((cell) => cell.row === 'D' && cell.col === '3').ship).not.toBe(null);
+        expect(gameboard.returnCell('d3').ship).not.toBe(null);
 
     })
     test('Placing a ship assigns the ship to the board', () => {

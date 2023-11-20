@@ -1,5 +1,7 @@
 import { Ship } from '../modules/ship';
-
+/**
+  * @jest-environment jsdom 
+  */
 
 describe('Ship methods', () => {
     let submarine = Ship(3);
