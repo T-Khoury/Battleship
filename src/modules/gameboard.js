@@ -1,4 +1,3 @@
-import { game } from "./battleship";
 import { Ship } from "./ship";
 
 function Gameboard() {
@@ -83,6 +82,7 @@ function Gameboard() {
             for (const cell in chosenCells) {
                 chosenCells[cell].ship = newShip
             };
+            gameboard.assignShip(newShip);
             return newShip
         },
         receiveAttack(coordinates) {
